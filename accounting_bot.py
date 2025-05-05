@@ -1012,63 +1012,121 @@ def handle_export_all_bills_command(update: Update, context: CallbackContext) ->
         logger.error(f"展示导出日期选择界面时出错: {e}", exc_info=True)
         update.message.reply_text(f"显示日期选择界面时出错: {str(e)}")
 
-def export_current_group_all_bills(query, context):
-    """导出当前群组7天内的所有账单 (回调查询版本)"""
-    logger.info("导出当前群组7天账单 (回调查询版本)")
-    
-    # 获取当前聊天ID
-    chat_id = query.message.chat_id
-    
+def export_chat_all_days_to_txt(chat_id, chat_title, summary_text, date_list):
+    """导出指定聊天在最近7天内的账单数据为TXT文件"""
     try:
-        # 获取群组信息
-        chat = context.bot.get_chat(chat_id)
-        chat_title = chat.title if chat.type in ['group', 'supergroup'] else "私聊"
+        # 创建导出目录，如果不存在
+        export_dir = "exports"
+        if not os.path.exists(export_dir):
+            os.makedirs(export_dir)
         
-        # 获取最近7天的日期列表
-        dates = []
-        for i in range(7):
-            date = (datetime.datetime.now(timezone) - datetime.timedelta(days=i)).strftime('%Y-%m-%d')
-            dates.append(date)
+        # 创建安全的文件名
+        safe_name = "".join([c if c.isalnum() else "_" for c in chat_title])
+        timestamp = datetime.datetime.now(timezone).strftime("%Y%m%d_%H%M%S")
+        file_path = os.path.join(export_dir, f"{safe_name}_7days_{timestamp}.txt")
         
-        # 创建回调查询对象
-        keyboard = [[InlineKeyboardButton("返回", callback_data="first_page")]]
-        reply_markup = InlineKeyboardMarkup(keyboard)
+        # 获取该聊天的账单数据
+        chat_data = get_chat_accounting(chat_id)
         
-        # 更新消息，表示正在导出
-        query.edit_message_text(f"正在导出 {chat_title} 最近7天的账单数据...", reply_markup=reply_markup)
+        # 准备文件内容
+        content = f"===== {chat_title} 财务账单 =====\n"
+        content += f"导出时间: {datetime.datetime.now(timezone).strftime('%Y-%m-%d %H:%M:%S')}\n\n"
         
-        # 检查账单是否为空
-        if chat_id not in chat_accounting:
-            # 创建空账单
-            get_chat_accounting(chat_id)
+        # 添加摘要部分
+        content += summary_text + "\n"
         
-        # 生成摘要
-        summary_text = generate_chat_all_days_summary(chat_id, chat_title, dates)
+        # 添加明细部分 - 按日期组织
+        all_deposits = chat_data['deposits']
+        all_withdrawals = chat_data['withdrawals']
         
-        # 导出为TXT文件
-        file_path = export_chat_all_days_to_txt(chat_id, chat_title, summary_text, dates)
+        # 汇率
+        rate = chat_data.get('fixed_rate', 1.0)
         
-        # 发送文件给用户
-        if file_path:
-            with open(file_path, 'rb') as file:
-                context.bot.send_document(
-                    chat_id=query.message.chat_id,
-                    document=file,
-                    filename=f"{chat_title}_7天账单.txt",
-                    caption=f"{chat_title} 最近7天财务账单导出文件"
-                )
-            logger.info(f"已导出 {chat_title} 最近7天的账单数据到 {file_path}")
-            
-            # 更新消息，表示导出成功
-            query.edit_message_text(f"已成功导出 {chat_title} 最近7天的账单数据", reply_markup=reply_markup)
+        # 添加入款和出款的明细列表
+        content += "===== 全部入款明细 =====\n"
+        if all_deposits:
+            sorted_deposits = sorted(all_deposits, key=lambda x: x.get('time', ''), reverse=True)
+            for i, deposit in enumerate(sorted_deposits, 1):
+                amount = deposit['amount']
+                username = deposit['user']
+                time_str = deposit.get('time', '未知时间')
+                usd_equivalent = amount / rate if rate != 0 else 0
+                
+                content += f"{i}. 时间: {time_str}, 金额: {amount:.2f}, 用户: {username}, USD等值: {usd_equivalent:.2f}\n"
         else:
-            # 更新消息，表示导出失败
-            query.edit_message_text(f"未能导出 {chat_title} 最近7天的账单数据", reply_markup=reply_markup)
+            content += "暂无入款记录\n"
+            
+        content += "\n===== 全部出款明细 =====\n"
+        if all_withdrawals:
+            sorted_withdrawals = sorted(all_withdrawals, key=lambda x: x.get('time', ''), reverse=True)
+            for i, withdrawal in enumerate(sorted_withdrawals, 1):
+                amount = withdrawal['amount']
+                username = withdrawal['user']
+                time_str = withdrawal.get('time', '未知时间')
+                usd_equivalent = withdrawal['usd_equivalent']
+                
+                content += f"{i}. 时间: {time_str}, 金额: {amount:.2f}, 用户: {username}, USD等值: {usd_equivalent:.2f}\n"
+        else:
+            content += "暂无出款记录\n"
+            
+        # 按日期组织明细数据
+        content += "\n===== 按日期明细 =====\n"
+        for date_str in date_list:
+            # 筛选指定日期的记录
+            date_deposits = [d for d in all_deposits if d['time'].split(' ')[0] == date_str]
+            date_withdrawals = [w for w in all_withdrawals if w['time'].split(' ')[0] == date_str]
+            
+            if not date_deposits and not date_withdrawals:
+                continue  # 如果这一天没有记录，跳过
+            
+            # 添加日期标题
+            content += f"\n----- {date_str} -----\n"
+            
+            # 入款记录
+            content += "入款:\n"
+            if date_deposits:
+                for i, deposit in enumerate(sorted(date_deposits, key=lambda x: x.get('time', ''), reverse=True), 1):
+                    amount = deposit['amount']
+                    username = deposit['user']
+                    time_str = deposit.get('time', '')
+                    time_parts = time_str.split(' ')
+                    if len(time_parts) > 1:
+                        time_only = time_parts[1]
+                    else:
+                        time_only = "未知时间"
+                    usd_equivalent = amount / rate if rate != 0 else 0
+                    
+                    content += f"  {i}. {time_only}, {username}, {amount:.2f}, USD等值: {usd_equivalent:.2f}\n"
+            else:
+                content += "  暂无入款记录\n"
+            
+            # 出款记录
+            content += "出款:\n"
+            if date_withdrawals:
+                for i, withdrawal in enumerate(sorted(date_withdrawals, key=lambda x: x.get('time', ''), reverse=True), 1):
+                    amount = withdrawal['amount']
+                    username = withdrawal['user']
+                    time_str = withdrawal.get('time', '')
+                    time_parts = time_str.split(' ')
+                    if len(time_parts) > 1:
+                        time_only = time_parts[1]
+                    else:
+                        time_only = "未知时间"
+                    usd_equivalent = withdrawal['usd_equivalent']
+                    
+                    content += f"  {i}. {time_only}, {username}, {amount:.2f}, USD等值: {usd_equivalent:.2f}\n"
+            else:
+                content += "  暂无出款记录\n"
+        
+        # 写入文件
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(content)
+        
+        logger.info(f"已导出群组 {chat_id} 的账单数据到 {file_path}")
+        return file_path
     except Exception as e:
-        logger.error(f"导出群组7天账单时出错: {e}", exc_info=True)
-        keyboard = [[InlineKeyboardButton("返回", callback_data="first_page")]]
-        reply_markup = InlineKeyboardMarkup(keyboard)
-        query.edit_message_text(f"导出账单时出错: {str(e)}", reply_markup=reply_markup)
+        logger.error(f"导出账单数据时出错: {e}", exc_info=True)
+        return None
 
 def handle_calculator(message_text):
     """处理计算器功能"""
@@ -1367,172 +1425,103 @@ def export_chat_all_days_to_txt(chat_id, chat_title, summary_text, date_list):
         chat_data = get_chat_accounting(chat_id)
         
         # 准备文件内容
-        content = f"===== {chat_title} 最近7天财务账单 =====\n"
-        content += f"导出时间: {datetime.datetime.now(timezone).strftime('%Y-%m-%d %H:%M:%S')}\n"
-        content += f"包含日期: {date_list[0]} 至 {date_list[-1]}\n\n"
+        content = f"===== {chat_title} 财务账单 =====\n"
+        content += f"导出时间: {datetime.datetime.now(timezone).strftime('%Y-%m-%d %H:%M:%S')}\n\n"
         
-        # 获取汇率和费率
-        rate = chat_data.get('fixed_rate', 1.0)
-        fee_rate = chat_data.get('rate', 0.0)
+        # 添加摘要部分
+        content += summary_text + "\n"
         
-        # 计算总体统计数据
+        # 添加明细部分 - 按日期组织
         all_deposits = chat_data['deposits']
         all_withdrawals = chat_data['withdrawals']
         
-        deposit_total = sum(deposit['amount'] for deposit in all_deposits)
-        deposit_count = len(all_deposits)
+        # 汇率
+        rate = chat_data.get('fixed_rate', 1.0)
         
-        withdrawal_total_local = sum(withdraw['amount'] for withdraw in all_withdrawals)
-        withdrawal_total_usdt = sum(withdraw.get('usd_equivalent', 0) for withdraw in all_withdrawals)
-        withdrawal_count = len(all_withdrawals)
-        
-        # 计算实际金额 - 使用除法计算
-        actual_amount = deposit_total / rate if rate != 0 else 0
-        to_be_withdrawn = actual_amount
-        already_withdrawn = withdrawal_total_usdt
-        not_yet_withdrawn = to_be_withdrawn - already_withdrawn
-        
-        # 添加总体摘要，使用与详细账单相同的格式
-        content += f"====== {chat_title} 摘要 ======\n\n"
-        
-        # 显示入款部分 - 按时间排序显示最新的6笔入款
-        content += f"入款（{deposit_count}笔）：\n"
-        if deposit_count > 0:
-            # 按时间排序，最新的在前面
+        # 添加入款和出款的明细列表
+        content += "===== 全部入款明细 =====\n"
+        if all_deposits:
             sorted_deposits = sorted(all_deposits, key=lambda x: x.get('time', ''), reverse=True)
-            # 获取最新的6笔入款记录
-            latest_deposits = sorted_deposits[:min(6, len(sorted_deposits))]
-            
-            # 显示每个入款记录及其回复人
-            for deposit in latest_deposits:
+            for i, deposit in enumerate(sorted_deposits, 1):
                 amount = deposit['amount']
-                # 计算美元等值：金额除以汇率
-                usd_equivalent = amount / rate if rate != 0 else 0
-                responder = deposit.get('responder', '无回复人')
-                
-                # 提取时间戳中的小时和分钟
-                time_str = deposit.get('time', '')
-                time_parts = time_str.split(' ')
-                if len(time_parts) > 1:
-                    time_part = time_parts[1]  # 获取时间部分 (HH:MM:SS)
-                    hour_min = ':'.join(time_part.split(':')[:2])  # 只保留小时和分钟
-                else:
-                    hour_min = "00:00"  # 默认时间
-                    
-                # 使用新的格式: HH:MM 金额/汇率 =美元等值 回复人
-                responder_display = "" if responder is None or responder == "None" else responder
-                content += f"  {hour_min} {amount:.0f}/{rate} ={usd_equivalent:.2f} {responder_display}\n"
-        else:
-            content += "  暂无入金\n"
-        
-        # 统计以回复用户为分类的入款信息
-        responder_deposits = {}
-        for deposit in all_deposits:
-            # 只处理有回复者信息的记录
-            if 'responder' in deposit and deposit['responder']:
-                responder = deposit['responder']
                 username = deposit['user']
-                amount = deposit['amount']
+                time_str = deposit.get('time', '未知时间')
+                usd_equivalent = amount / rate if rate != 0 else 0
                 
-                # 创建或更新此回复者的记录
-                if responder not in responder_deposits:
-                    responder_deposits[responder] = {'total': 0, 'users': {}}
-                
-                responder_deposits[responder]['total'] += amount
-                
-                # 记录是哪个用户对这个回复者进行了入款
-                if username not in responder_deposits[responder]['users']:
-                    responder_deposits[responder]['users'][username] = 0
-                responder_deposits[responder]['users'][username] += amount
-        
-        # 计算分类人数
-        responder_count = len(responder_deposits)
-        
-        # 显示分类部分
-        content += f"\n分类（{responder_count}人）：\n"
-        if responder_count > 0:
-            for responder, data in responder_deposits.items():
-                total_amount = data['total']
-                # 对于每个回复者，只显示总金额，不显示来源
-                content += f"  {responder} {total_amount:.2f}\n"
+                content += f"{i}. 时间: {time_str}, 金额: {amount:.2f}, 用户: {username}, USD等值: {usd_equivalent:.2f}\n"
         else:
-            content += "  暂无分类\n"
-        
-        # 显示下发部分
-        content += f"\n下发（{withdrawal_count}笔）：\n"
-        if withdrawal_count > 0:
-            # 统计每个用户的出款
-            user_withdrawals = {}
-            for withdrawal in all_withdrawals:
-                username = withdrawal['user']
-                # 使用USDT金额而不是本地货币
-                amount = withdrawal.get('usd_equivalent', withdrawal['amount'])
-                if username not in user_withdrawals:
-                    user_withdrawals[username] = 0
-                user_withdrawals[username] += amount
+            content += "暂无入款记录\n"
             
-            for username, amount in user_withdrawals.items():
-                content += f"  {username}: {amount:.2f}\n"
+        content += "\n===== 全部出款明细 =====\n"
+        if all_withdrawals:
+            sorted_withdrawals = sorted(all_withdrawals, key=lambda x: x.get('time', ''), reverse=True)
+            for i, withdrawal in enumerate(sorted_withdrawals, 1):
+                amount = withdrawal['amount']
+                username = withdrawal['user']
+                time_str = withdrawal.get('time', '未知时间')
+                usd_equivalent = withdrawal['usd_equivalent']
+                
+                content += f"{i}. 时间: {time_str}, 金额: {amount:.2f}, 用户: {username}, USD等值: {usd_equivalent:.2f}\n"
         else:
-            content += "  暂无下发\n"
-        
-        # 添加费率、汇率和统计信息
-        content += f"\n费率：{fee_rate}%\n"
-        content += f"固定汇率：{rate}\n"
-        content += f"总入款：{deposit_total:.2f}\n"
-        content += f"应下发：{deposit_total:.2f}｜{to_be_withdrawn:.2f}U\n"
-        content += f"已下发：{withdrawal_total_local:.2f}｜{already_withdrawn:.2f}U\n"
-        content += f"未下发：{deposit_total-withdrawal_total_local:.2f}｜{not_yet_withdrawn:.2f}U\n\n"
-        
-        # 添加详细的每日数据
-        content += "===== 详细数据 =====\n"
-        
-        # 添加每天的详细交易记录
+            content += "暂无出款记录\n"
+            
+        # 按日期组织明细数据
+        content += "\n===== 按日期明细 =====\n"
         for date_str in date_list:
             # 筛选指定日期的记录
-            date_deposits = [d for d in chat_data['deposits'] if d['time'].split(' ')[0] == date_str]
-            date_withdrawals = [w for w in chat_data['withdrawals'] if w['time'].split(' ')[0] == date_str]
+            date_deposits = [d for d in all_deposits if d['time'].split(' ')[0] == date_str]
+            date_withdrawals = [w for w in all_withdrawals if w['time'].split(' ')[0] == date_str]
             
             if not date_deposits and not date_withdrawals:
                 continue  # 如果这一天没有记录，跳过
-                
+            
             # 添加日期标题
-            content += f"\n\n===== {date_str} 交易明细 =====\n"
+            content += f"\n----- {date_str} -----\n"
             
-            # 添加详细的入款记录
-            content += "\n【入款明细】\n"
+            # 入款记录
+            content += "入款:\n"
             if date_deposits:
-                for i, deposit in enumerate(date_deposits, 1):
-                    content += f"{i}. 时间: {deposit['time'].split(' ')[1]}, "
-                    content += f"金额: {deposit['amount']:.2f}, "
-                    content += f"用户: {deposit['user']}"
-                    # 添加回复人信息
-                    if 'responder' in deposit and deposit['responder']:
-                        responder_display = deposit['responder']
-                        if responder_display and responder_display != "None":
-                            content += f", 回复人: {responder_display}"
-                    content += f", USD等值: {deposit.get('usd_equivalent', 0):.2f}\n"
+                for i, deposit in enumerate(sorted(date_deposits, key=lambda x: x.get('time', ''), reverse=True), 1):
+                    amount = deposit['amount']
+                    username = deposit['user']
+                    time_str = deposit.get('time', '')
+                    time_parts = time_str.split(' ')
+                    if len(time_parts) > 1:
+                        time_only = time_parts[1]
+                    else:
+                        time_only = "未知时间"
+                    usd_equivalent = amount / rate if rate != 0 else 0
+                    
+                    content += f"  {i}. {time_only}, {username}, {amount:.2f}, USD等值: {usd_equivalent:.2f}\n"
             else:
-                content += "当日无入款记录\n"
+                content += "  暂无入款记录\n"
             
-            # 添加详细的出款记录
-            content += "\n【出款明细】\n"
+            # 出款记录
+            content += "出款:\n"
             if date_withdrawals:
-                for i, withdrawal in enumerate(date_withdrawals, 1):
-                    content += f"{i}. 时间: {withdrawal['time'].split(' ')[1]}, "
-                    content += f"金额: {withdrawal['amount']:.2f}, "
-                    content += f"用户: {withdrawal['user']}, "
-                    content += f"USD等值: {withdrawal.get('usd_equivalent', 0):.2f}\n"
+                for i, withdrawal in enumerate(sorted(date_withdrawals, key=lambda x: x.get('time', ''), reverse=True), 1):
+                    amount = withdrawal['amount']
+                    username = withdrawal['user']
+                    time_str = withdrawal.get('time', '')
+                    time_parts = time_str.split(' ')
+                    if len(time_parts) > 1:
+                        time_only = time_parts[1]
+                    else:
+                        time_only = "未知时间"
+                    usd_equivalent = withdrawal['usd_equivalent']
+                    
+                    content += f"  {i}. {time_only}, {username}, {amount:.2f}, USD等值: {usd_equivalent:.2f}\n"
             else:
-                content += "当日无出款记录\n"
+                content += "  暂无出款记录\n"
         
         # 写入文件
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(content)
         
+        logger.info(f"已导出群组 {chat_id} 的账单数据到 {file_path}")
         return file_path
     except Exception as e:
-        logger.error(f"导出聊天 {chat_id} 的7天账单数据时出错: {e}", exc_info=True)
+        logger.error(f"导出账单数据时出错: {e}", exc_info=True)
         return None
 
 # 导出指定日期所有群组的统计数据
@@ -3816,6 +3805,9 @@ def export_current_bill(query, context, chat_id):
         chat = context.bot.get_chat(chat_id)
         chat_title = getattr(chat, 'title', f'Chat {chat_id}')
         
+        # 更新消息，表示正在生成账单
+        query.edit_message_text(f"正在生成 {chat_title} 账单...")
+        
         # 获取该聊天的账单数据
         chat_data = get_chat_accounting(chat_id)
         
@@ -3888,42 +3880,38 @@ def generate_bill_summary(chat_id, chat_title, chat_data):
     summary_text += f"已下发: {already_withdrawn:.2f}U\n"
     summary_text += f"未下发: {not_yet_withdrawn:.2f}U\n\n"
     
-    # 入款记录
-    summary_text += f"==== 入款记录 ({deposit_count}笔) ====\n\n"
-    
+    # 入款明细
+    summary_text += f"===== 入款明细 =====\n"
     if deposit_count > 0:
-        for deposit in sorted(chat_data['deposits'], key=lambda x: x.get('time', ''), reverse=True):
+        # 按时间排序
+        sorted_deposits = sorted(chat_data['deposits'], key=lambda x: x.get('time', ''), reverse=True)
+        
+        # 显示每个入款记录
+        for i, deposit in enumerate(sorted_deposits, 1):
             amount = deposit['amount']
             username = deposit['user']
             time_str = deposit.get('time', '未知时间')
             # 计算美元等值
             usd_equivalent = amount / rate if rate != 0 else 0
-            responder = deposit.get('responder', '无回复人')
             
-            summary_text += f"时间: {time_str}\n"
-            summary_text += f"用户: {username}\n"
-            summary_text += f"金额: {amount:.2f}\n"
-            summary_text += f"美元等值: {usd_equivalent:.2f}U\n"
-            summary_text += f"回复人: {responder}\n"
-            summary_text += "----------\n"
+            summary_text += f"{i}. 时间: {time_str}, 金额: {amount:.2f}, 用户: {username}, USD等值: {usd_equivalent:.2f}\n"
     else:
-        summary_text += "暂无入款记录\n\n"
+        summary_text += "暂无入款记录\n"
     
-    # 出款记录
-    summary_text += f"\n==== 出款记录 ({withdrawal_count}笔) ====\n\n"
-    
+    # 出款明细
+    summary_text += f"\n===== 出款明细 =====\n"
     if withdrawal_count > 0:
-        for withdrawal in sorted(chat_data['withdrawals'], key=lambda x: x.get('time', ''), reverse=True):
+        # 按时间排序
+        sorted_withdrawals = sorted(chat_data['withdrawals'], key=lambda x: x.get('time', ''), reverse=True)
+        
+        # 显示每个出款记录
+        for i, withdrawal in enumerate(sorted_withdrawals, 1):
             amount = withdrawal['amount']
             username = withdrawal['user']
             time_str = withdrawal.get('time', '未知时间')
             usd_equivalent = withdrawal['usd_equivalent']
             
-            summary_text += f"时间: {time_str}\n"
-            summary_text += f"用户: {username}\n"
-            summary_text += f"金额: {amount:.2f}\n"
-            summary_text += f"美元等值: {usd_equivalent:.2f}U\n"
-            summary_text += "----------\n"
+            summary_text += f"{i}. 时间: {time_str}, 金额: {amount:.2f}, 用户: {username}, USD等值: {usd_equivalent:.2f}\n"
     else:
         summary_text += "暂无出款记录\n"
     
