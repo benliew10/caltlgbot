@@ -9,16 +9,18 @@ import datetime
 import pytz
 import re
 import logging
+
+# Create imghdr module replacement BEFORE importing telegram
+class ImghdrModule:
+    def what(self, *args, **kwargs):
+        return None
+sys.modules['imghdr'] = ImghdrModule()
+
 from telegram import Update, ParseMode, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext, CallbackQueryHandler
 import signal
 import threading
 from http.server import HTTPServer, BaseHTTPRequestHandler
-
-class ImghdrModule:
-    def what(self, *args, **kwargs):
-        return None
-sys.modules['imghdr'] = ImghdrModule()
 
 # 导入配置文件
 from config import BOT_TOKEN, ADMIN_USER_ID, INITIAL_OPERATORS, TIMEZONE, RESET_CHECK_INTERVAL
@@ -951,7 +953,7 @@ def handle_export_all_bills_command(update_or_query, context: CallbackContext) -
     is_callback = hasattr(update_or_query, 'callback_query')
     
     if is_callback:
-        query = update_or_query
+        query = update_or_query.callback_query
         chat_id = query.message.chat_id
         update_object = query
     else:
@@ -1002,7 +1004,7 @@ def handle_export_all_bills_command(update_or_query, context: CallbackContext) -
         # 如果没有找到任何有记录的日期
         if not dates_with_records:
             if is_callback:
-                query.edit_message_text(f"{chat_title} 最近7天内没有任何记账记录")
+                update_object.edit_message_text(f"{chat_title} 最近7天内没有任何记账记录")
             else:
                 update_object.message.reply_text(f"{chat_title} 最近7天内没有任何记账记录")
             return
@@ -1020,14 +1022,14 @@ def handle_export_all_bills_command(update_or_query, context: CallbackContext) -
         
         # 发送日期选择界面
         if is_callback:
-            query.edit_message_text(f"请选择要导出的日期:", reply_markup=reply_markup)
+            update_object.edit_message_text(f"请选择要导出的日期:", reply_markup=reply_markup)
         else:
             update_object.message.reply_text(f"请选择要导出的日期:", reply_markup=reply_markup)
         
     except Exception as e:
         logger.error(f"展示导出日期选择界面时出错: {e}", exc_info=True)
         if is_callback:
-            query.edit_message_text(f"显示日期选择界面时出错: {str(e)}")
+            update_object.edit_message_text(f"显示日期选择界面时出错: {str(e)}")
         else:
             update_object.message.reply_text(f"显示日期选择界面时出错: {str(e)}")
 
@@ -1956,52 +1958,6 @@ def export_group_data_to_txt(group_name, summary_text):
         
         # 添加摘要数据
         content += summary_text
-        
-        # 查找对应的聊天ID
-        chat_id = None
-        chat_data = None
-        for cid, data in chat_accounting.items():
-            try:
-                chat = None
-                try:
-                    from telegram import Bot
-                    bot = Bot(token=BOT_TOKEN)
-                    chat = bot.get_chat(cid)
-                    if chat.type in ['group', 'supergroup'] and chat.title == group_name:
-                        chat_id = cid
-                        chat_data = data
-                        break
-                except:
-                    # 如果无法获取聊天信息，则跳过
-                    continue
-            except Exception as e:
-                logger.error(f"检查聊天ID {cid} 时出错: {e}")
-        
-        if chat_id is not None and chat_data is not None:
-            # 添加详细的入款记录
-            content += "\n\n===== 入款明细 =====\n"
-            if len(chat_data['deposits']) > 0:
-                for i, deposit in enumerate(chat_data['deposits'], 1):
-                    content += f"{i}. 时间: {deposit['time']}, "
-                    content += f"金额: {deposit['amount']:.2f}, "
-                    content += f"用户: {deposit['user']}, "
-                    # 添加回复人信息
-                    if 'responder' in deposit and deposit['responder']:
-                        content += f"回复人: {deposit['responder']}, "
-                    content += f"USD等值: {deposit['usd_equivalent']:.2f}\n"
-            else:
-                content += "暂无入款记录\n"
-            
-            # 添加详细的出款记录
-            content += "\n===== 出款明细 =====\n"
-            if len(chat_data['withdrawals']) > 0:
-                for i, withdrawal in enumerate(chat_data['withdrawals'], 1):
-                    content += f"{i}. 时间: {withdrawal['time']}, "
-                    content += f"金额: {withdrawal['amount']:.2f}, "
-                    content += f"用户: {withdrawal['user']}, "
-                    content += f"USD等值: {withdrawal['usd_equivalent']:.2f}\n"
-            else:
-                content += "暂无出款记录\n"
         
         # 写入文件
         with open(file_path, 'w', encoding='utf-8') as f:
@@ -4074,7 +4030,7 @@ def button_callback(update: Update, context: CallbackContext) -> None:
             chat_id = int(data.split("_")[1])
             export_current_group_all_bills(query, context)
         elif data.startswith("export_all_bills_"):
-            handle_export_all_bills_command(query, context)
+            handle_export_all_bills_command(update, context)
         elif data.startswith("financial_"):
             show_financial_summary(query, context)
         elif data.startswith("select_date_"):
