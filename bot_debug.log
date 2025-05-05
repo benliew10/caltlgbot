@@ -1,0 +1,421 @@
+2025-05-01 04:06:26,610 - bot_runner - INFO - ======= 开始启动 Bot Runner =======
+2025-05-01 04:06:26,612 - bot_runner - INFO - 已加载配置文件，配置项：['BOT_TOKEN', 'ADMIN_USER_ID', 'INITIAL_OPERATORS', 'TIMEZONE', 'RESET_CHECK_INTERVAL']
+2025-05-01 04:06:26,612 - bot_runner - ERROR - 配置文件中缺少token，无法启动机器人
+2025-05-01 04:06:26,612 - bot_runner - ERROR - 配置验证失败，无法启动机器人
+2025-05-01 04:07:56,865 - bot_runner - INFO - ======= 开始启动 Bot Runner =======
+2025-05-01 04:07:56,866 - bot_runner - INFO - 已加载配置文件，配置项：['BOT_TOKEN', 'ADMIN_USER_ID', 'INITIAL_OPERATORS', 'TIMEZONE', 'RESET_CHECK_INTERVAL']
+2025-05-01 04:07:56,866 - bot_runner - INFO - 配置验证通过，Bot Token长度: 46
+2025-05-01 04:07:56,866 - bot_runner - INFO - 启动简单echo机器人
+2025-05-01 04:07:56,866 - telegram.ext.dispatcher - DEBUG - Setting singleton dispatcher as <telegram.ext.dispatcher.Dispatcher object at 0x000001E8E72BF6C0>
+2025-05-01 04:07:56,867 - bot_runner - INFO - 已添加调试命令处理器
+2025-05-01 04:07:56,867 - bot_runner - INFO - 开始启动简单echo机器人
+2025-05-01 04:07:56,867 - apscheduler.scheduler - INFO - Scheduler started
+2025-05-01 04:07:56,868 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-05-01 04:07:56,868 - telegram.bot - DEBUG - Entering: get_me
+2025-05-01 04:07:56,868 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-05-01 04:07:56,868 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.telegram.org:443
+2025-05-01 04:07:58,021 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getMe HTTP/1.1" 200 270
+2025-05-01 04:07:58,022 - telegram.bot - DEBUG - {'can_read_all_group_messages': True, 'can_join_groups': True, 'first_name': '测试机器人', 'is_bot': True, 'username': 'test1calbot', 'supports_inline_queries': False, 'id': 8087490170}
+2025-05-01 04:07:58,023 - telegram.bot - DEBUG - Exiting: get_me
+2025-05-01 04:07:58,024 - telegram.ext.updater - DEBUG - Bot:8087490170:dispatcher - started
+2025-05-01 04:07:58,024 - telegram.ext.updater - DEBUG - Bot:8087490170:updater - started
+2025-05-01 04:07:58,024 - telegram.ext.updater - DEBUG - Waiting for Dispatcher and polling to start
+2025-05-01 04:07:58,024 - telegram.ext.updater - DEBUG - Updater thread started (polling)
+2025-05-01 04:07:58,024 - telegram.ext.updater - DEBUG - Start network loop retry bootstrap del webhook
+2025-05-01 04:07:58,025 - telegram.ext.updater - DEBUG - Deleting webhook
+2025-05-01 04:07:58,025 - telegram.ext.dispatcher - DEBUG - Dispatcher started
+2025-05-01 04:07:58,025 - telegram.bot - DEBUG - Entering: delete_webhook
+2025-05-01 04:07:58,236 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/deleteWebhook HTTP/1.1" 200 68
+2025-05-01 04:07:58,237 - telegram.bot - DEBUG - True
+2025-05-01 04:07:58,237 - telegram.bot - DEBUG - Exiting: delete_webhook
+2025-05-01 04:07:58,237 - telegram.ext.updater - DEBUG - Bootstrap done
+2025-05-01 04:07:58,238 - telegram.ext.updater - DEBUG - Start network loop retry getting Updates
+2025-05-01 04:07:58,238 - bot_runner - INFO - 简单echo机器人已启动
+2025-05-01 04:07:58,238 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 04:08:08,771 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 04:08:08,771 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 04:08:08,771 - telegram.bot - DEBUG - []
+2025-05-01 04:08:08,771 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 04:08:08,772 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 04:08:19,451 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 04:08:19,452 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 04:08:19,452 - telegram.bot - DEBUG - []
+2025-05-01 04:08:19,452 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 04:08:19,452 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 04:08:20,911 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 307
+2025-05-01 04:08:20,912 - telegram.bot - DEBUG - Getting updates: [10339178]
+2025-05-01 04:08:20,912 - telegram.bot - DEBUG - [<telegram.update.Update object at 0x000001E8E7347590>]
+2025-05-01 04:08:20,913 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 04:08:20,913 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 04:08:20,913 - telegram.ext.dispatcher - DEBUG - Processing Update: {'update_id': 10339178, 'message': {'date': 1746043702, 'message_id': 1032, 'photo': [], 'text': '100', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '来追我', 'is_bot': False, 'username': 'm119010', 'language_code': 'ms', 'id': 1844353808}}}
+2025-05-01 04:08:20,915 - bot_runner - INFO - 收到消息: 100
+2025-05-01 04:08:20,916 - telegram.bot - DEBUG - Entering: send_message
+2025-05-01 04:08:20,916 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (2): api.telegram.org:443
+2025-05-01 04:08:22,188 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/sendMessage HTTP/1.1" 200 586
+2025-05-01 04:08:22,189 - telegram.bot - DEBUG - {'date': 1746043704, 'reply_to_message': {'date': 1746043702, 'message_id': 1032, 'photo': [], 'text': '100', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '来追我', 'is_bot': False, 'username': 'm119010', 'language_code': 'ms', 'id': 1844353808}}, 'message_id': 1033, 'photo': [], 'text': '收到消息: 100', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '测试机器人', 'is_bot': True, 'username': 'test1calbot', 'id': 8087490170}}
+2025-05-01 04:08:22,190 - telegram.bot - DEBUG - Exiting: send_message
+2025-05-01 04:08:25,907 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 308
+2025-05-01 04:08:25,908 - telegram.bot - DEBUG - Getting updates: [10339179]
+2025-05-01 04:08:25,908 - telegram.bot - DEBUG - [<telegram.update.Update object at 0x000001E8E73474D0>]
+2025-05-01 04:08:25,908 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 04:08:25,908 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 04:08:25,908 - telegram.ext.dispatcher - DEBUG - Processing Update: {'update_id': 10339179, 'message': {'date': 1746043707, 'message_id': 1034, 'photo': [], 'text': '+100', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '来追我', 'is_bot': False, 'username': 'm119010', 'language_code': 'ms', 'id': 1844353808}}}
+2025-05-01 04:08:25,909 - bot_runner - INFO - 收到消息: +100
+2025-05-01 04:08:25,910 - telegram.bot - DEBUG - Entering: send_message
+2025-05-01 04:08:26,336 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/sendMessage HTTP/1.1" 200 588
+2025-05-01 04:08:26,337 - telegram.bot - DEBUG - {'date': 1746043708, 'reply_to_message': {'date': 1746043707, 'message_id': 1034, 'photo': [], 'text': '+100', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '来追我', 'is_bot': False, 'username': 'm119010', 'language_code': 'ms', 'id': 1844353808}}, 'message_id': 1035, 'photo': [], 'text': '收到消息: +100', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '测试机器人', 'is_bot': True, 'username': 'test1calbot', 'id': 8087490170}}
+2025-05-01 04:08:26,337 - telegram.bot - DEBUG - Exiting: send_message
+2025-05-01 04:08:36,170 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 04:08:36,220 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 04:08:36,237 - telegram.bot - DEBUG - []
+2025-05-01 04:08:36,237 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 04:08:36,237 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 04:08:46,494 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 04:08:46,494 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 04:08:46,494 - telegram.bot - DEBUG - []
+2025-05-01 04:08:46,494 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 04:08:46,495 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 04:08:56,713 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 04:08:56,713 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 04:08:56,713 - telegram.bot - DEBUG - []
+2025-05-01 04:08:56,714 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 04:08:56,714 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 04:08:59,471 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 307
+2025-05-01 04:08:59,472 - telegram.bot - DEBUG - Getting updates: [10339180]
+2025-05-01 04:08:59,472 - telegram.bot - DEBUG - [<telegram.update.Update object at 0x000001E8E7347590>]
+2025-05-01 04:08:59,472 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 04:08:59,472 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 04:08:59,472 - telegram.ext.dispatcher - DEBUG - Processing Update: {'update_id': 10339180, 'message': {'date': 1746043741, 'message_id': 1035, 'photo': [], 'text': '110', 'chat': {'title': '供方测试', 'type': 'supergroup', 'id': -1002648889060}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '来追我', 'is_bot': False, 'username': 'm119010', 'language_code': 'ms', 'id': 1844353808}}}
+2025-05-01 04:08:59,473 - bot_runner - INFO - 收到消息: 110
+2025-05-01 04:08:59,473 - telegram.bot - DEBUG - Entering: send_message
+2025-05-01 04:08:59,864 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/sendMessage HTTP/1.1" 200 586
+2025-05-01 04:08:59,865 - telegram.bot - DEBUG - {'date': 1746043741, 'reply_to_message': {'date': 1746043741, 'message_id': 1035, 'photo': [], 'text': '110', 'chat': {'title': '供方测试', 'type': 'supergroup', 'id': -1002648889060}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '来追我', 'is_bot': False, 'username': 'm119010', 'language_code': 'ms', 'id': 1844353808}}, 'message_id': 1036, 'photo': [], 'text': '收到消息: 110', 'chat': {'title': '供方测试', 'type': 'supergroup', 'id': -1002648889060}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '测试机器人', 'is_bot': True, 'username': 'test1calbot', 'id': 8087490170}}
+2025-05-01 04:08:59,865 - telegram.bot - DEBUG - Exiting: send_message
+2025-05-01 04:09:09,716 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 04:09:09,716 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 04:09:09,716 - telegram.bot - DEBUG - []
+2025-05-01 04:09:09,717 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 04:09:09,717 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 04:09:20,021 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 04:09:20,022 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 04:09:20,022 - telegram.bot - DEBUG - []
+2025-05-01 04:09:20,022 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 04:09:20,022 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 04:09:30,593 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 04:09:30,593 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 04:09:30,593 - telegram.bot - DEBUG - []
+2025-05-01 04:09:30,594 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 04:09:30,594 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 04:09:40,813 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 04:09:40,813 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 04:09:40,813 - telegram.bot - DEBUG - []
+2025-05-01 04:09:40,813 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 04:09:40,814 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 04:09:51,025 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 04:09:51,025 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 04:09:51,026 - telegram.bot - DEBUG - []
+2025-05-01 04:09:51,026 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 04:09:51,026 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 18:22:47,409 - telegram.ext.updater - DEBUG - Timed out getting Updates: Timed out
+2025-05-01 18:22:47,421 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 18:22:47,422 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (3): api.telegram.org:443
+2025-05-01 18:22:49,492 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 4633
+2025-05-01 18:22:49,494 - telegram.bot - DEBUG - Getting updates: [10339181, 10339182, 10339183, 10339184, 10339185, 10339186, 10339187, 10339188, 10339189, 10339190]
+2025-05-01 18:22:49,496 - telegram.bot - DEBUG - [<telegram.update.Update object at 0x000001E8E73477D0>, <telegram.update.Update object at 0x000001E8E7347650>, <telegram.update.Update object at 0x000001E8E73474D0>, <telegram.update.Update object at 0x000001E8E7347710>, <telegram.update.Update object at 0x000001E8E7347A10>, <telegram.update.Update object at 0x000001E8E7347AD0>, <telegram.update.Update object at 0x000001E8E7347B90>, <telegram.update.Update object at 0x000001E8E7347C50>, <telegram.update.Update object at 0x000001E8E7347D10>, <telegram.update.Update object at 0x000001E8E7347DD0>]
+2025-05-01 18:22:49,498 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 18:22:49,498 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 18:22:49,498 - telegram.ext.dispatcher - DEBUG - Processing Update: {'update_id': 10339181, 'message': {'date': 1746044364, 'message_id': 1037, 'photo': [], 'text': '@m119010', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [{'length': 8, 'offset': 0, 'type': 'mention'}], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '凯越-JQ', 'is_bot': False, 'username': 'JQ226688', 'language_code': 'zh-hans', 'id': 7997704196}}}
+2025-05-01 18:22:49,502 - bot_runner - INFO - 收到消息: @m119010
+2025-05-01 18:22:49,503 - telegram.bot - DEBUG - Entering: send_message
+2025-05-01 18:22:50,628 - telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\urllib3\connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+        conn,
+    ...<5 lines>...
+        chunked=chunked,
+    )
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\urllib3\connectionpool.py", line 445, in _make_request
+    six.raise_from(e, None)
+    ~~~~~~~~~~~~~~^^^^^^^^^
+  File "<string>", line 3, in raise_from
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\urllib3\connectionpool.py", line 440, in _make_request
+    httplib_response = conn.getresponse()
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1304, in recv_into
+    return self.read(nbytes, buffer)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1138, in read
+    return self._sslobj.read(len, buffer)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+ConnectionResetError: [WinError 10054] 远程主机强迫关闭了一个现有的连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\telegram\utils\request.py", line 259, in _request_wrapper
+    resp = self._con_pool.request(*args, **kwargs)
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\urllib3\request.py", line 78, in request
+    return self.request_encode_body(
+           ~~~~~~~~~~~~~~~~~~~~~~~~^
+        method, url, fields=fields, headers=headers, **urlopen_kw
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\urllib3\request.py", line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\urllib3\poolmanager.py", line 375, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\urllib3\connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+        method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\urllib3\util\retry.py", line 532, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+          ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\urllib3\packages\six.py", line 769, in reraise
+    raise value.with_traceback(tb)
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\urllib3\connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+        conn,
+    ...<5 lines>...
+        chunked=chunked,
+    )
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\urllib3\connectionpool.py", line 445, in _make_request
+    six.raise_from(e, None)
+    ~~~~~~~~~~~~~~^^^^^^^^^
+  File "<string>", line 3, in raise_from
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\urllib3\connectionpool.py", line 440, in _make_request
+    httplib_response = conn.getresponse()
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1430, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1304, in recv_into
+    return self.read(nbytes, buffer)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\ssl.py", line 1138, in read
+    return self._sslobj.read(len, buffer)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+urllib3.exceptions.ProtocolError: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\telegram\ext\dispatcher.py", line 555, in process_update
+    handler.handle_update(update, self, check, context)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\telegram\ext\handler.py", line 198, in handle_update
+    return self.callback(update, context)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\PycharmProjects\new test\bot_runner.py", line 120, in echo
+    update.message.reply_text(f"收到消息: {text}")
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\telegram\message.py", line 764, in reply_text
+    return self.bot.send_message(
+           ~~~~~~~~~~~~~~~~~~~~~^
+        chat_id=self.chat_id,
+        ^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        entities=entities,
+        ^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\telegram\bot.py", line 130, in decorator
+    result = func(*args, **kwargs)
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\telegram\bot.py", line 513, in send_message
+    return self._message(  # type: ignore[return-value]
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        'sendMessage',
+        ^^^^^^^^^^^^^^
+    ...<6 lines>...
+        api_kwargs=api_kwargs,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\telegram\ext\extbot.py", line 199, in _message
+    result = super()._message(
+        endpoint=endpoint,
+    ...<6 lines>...
+        api_kwargs=api_kwargs,
+    )
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\telegram\bot.py", line 332, in _message
+    result = self._post(endpoint, data, timeout=timeout, api_kwargs=api_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\telegram\bot.py", line 295, in _post
+    return self.request.post(
+           ~~~~~~~~~~~~~~~~~^
+        f'{self.base_url}/{endpoint}', data=data, timeout=effective_timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\telegram\utils\request.py", line 356, in post
+    result = self._request_wrapper(
+        'POST',
+    ...<3 lines>...
+        **urlopen_kwargs,
+    )
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\telegram\utils\request.py", line 265, in _request_wrapper
+    raise NetworkError(f'urllib3 HTTPError {error}') from error
+telegram.error.NetworkError: urllib3 HTTPError ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+2025-05-01 18:22:50,730 - telegram.ext.dispatcher - DEBUG - Processing Update: {'update_id': 10339182, 'message': {'date': 1746044368, 'message_id': 1038, 'photo': [], 'text': '不用弄全自动了', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '凯越-JQ', 'is_bot': False, 'username': 'JQ226688', 'language_code': 'zh-hans', 'id': 7997704196}}}
+2025-05-01 18:22:50,734 - bot_runner - INFO - 收到消息: 不用弄全自动了
+2025-05-01 18:22:50,737 - telegram.bot - DEBUG - Entering: send_message
+2025-05-01 18:22:50,738 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (4): api.telegram.org:443
+2025-05-01 18:22:52,455 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/sendMessage HTTP/1.1" 200 659
+2025-05-01 18:22:52,456 - telegram.bot - DEBUG - {'date': 1746094974, 'reply_to_message': {'date': 1746044368, 'message_id': 1038, 'photo': [], 'text': '不用弄全自动了', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '凯越-JQ', 'is_bot': False, 'username': 'JQ226688', 'id': 7997704196}}, 'message_id': 1046, 'photo': [], 'text': '收到消息: 不用弄全自动了', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '测试机器人', 'is_bot': True, 'username': 'test1calbot', 'id': 8087490170}}
+2025-05-01 18:22:52,458 - telegram.bot - DEBUG - Exiting: send_message
+2025-05-01 18:22:52,458 - telegram.ext.dispatcher - DEBUG - Processing Update: {'update_id': 10339183, 'message': {'date': 1746044372, 'message_id': 1039, 'photo': [], 'text': '能记账就行', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '凯越-JQ', 'is_bot': False, 'username': 'JQ226688', 'language_code': 'zh-hans', 'id': 7997704196}}}
+2025-05-01 18:22:52,459 - bot_runner - INFO - 收到消息: 能记账就行
+2025-05-01 18:22:52,460 - telegram.bot - DEBUG - Entering: send_message
+2025-05-01 18:22:53,090 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/sendMessage HTTP/1.1" 200 635
+2025-05-01 18:22:53,091 - telegram.bot - DEBUG - {'date': 1746094975, 'reply_to_message': {'date': 1746044372, 'message_id': 1039, 'photo': [], 'text': '能记账就行', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '凯越-JQ', 'is_bot': False, 'username': 'JQ226688', 'id': 7997704196}}, 'message_id': 1047, 'photo': [], 'text': '收到消息: 能记账就行', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '测试机器人', 'is_bot': True, 'username': 'test1calbot', 'id': 8087490170}}
+2025-05-01 18:22:53,092 - telegram.bot - DEBUG - Exiting: send_message
+2025-05-01 18:22:53,092 - telegram.ext.dispatcher - DEBUG - Processing Update: {'update_id': 10339184, 'message': {'date': 1746044375, 'message_id': 1040, 'photo': [], 'text': '加账就行', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '凯越-JQ', 'is_bot': False, 'username': 'JQ226688', 'language_code': 'zh-hans', 'id': 7997704196}}}
+2025-05-01 18:22:53,191 - bot_runner - INFO - 收到消息: 加账就行
+2025-05-01 18:22:53,192 - telegram.bot - DEBUG - Entering: send_message
+2025-05-01 18:22:53,842 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/sendMessage HTTP/1.1" 200 623
+2025-05-01 18:22:53,844 - telegram.bot - DEBUG - {'date': 1746094975, 'reply_to_message': {'date': 1746044375, 'message_id': 1040, 'photo': [], 'text': '加账就行', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '凯越-JQ', 'is_bot': False, 'username': 'JQ226688', 'id': 7997704196}}, 'message_id': 1048, 'photo': [], 'text': '收到消息: 加账就行', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '测试机器人', 'is_bot': True, 'username': 'test1calbot', 'id': 8087490170}}
+2025-05-01 18:22:53,846 - telegram.bot - DEBUG - Exiting: send_message
+2025-05-01 18:22:53,846 - telegram.ext.dispatcher - DEBUG - Processing Update: {'update_id': 10339185, 'message': {'date': 1746044380, 'message_id': 1041, 'photo': [], 'sticker': {'set_name': 'xuanxuan_080227', 'file_id': 'CAACAgUAAyEFAASd4aiUAAIEEWgShdxLozCibjTdO47rf6ELItTAAALHBAAC4qOJVeAAAYF4720sYDYE', 'width': 512, 'emoji': '💔', 'file_size': 13122, 'file_unique_id': 'AgADxwQAAuKjiVU', 'is_animated': False, 'thumb': {'file_id': 'AAMCBQADIQUABJ3hqJQAAgQRaBKF3EujMKJuNN07jut_oQsi1MAAAscEAALio4lV4AABgXjvbSxgAQAHbQADNgQ', 'width': 320, 'file_size': 7820, 'file_unique_id': 'AQADxwQAAuKjiVVy', 'height': 254}, 'height': 406}, 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '凯越-快乐', 'is_bot': False, 'username': 'dszhen0', 'id': 5965182828}}}
+2025-05-01 18:22:53,849 - telegram.ext.dispatcher - DEBUG - Processing Update: {'update_id': 10339186, 'message': {'date': 1746044383, 'message_id': 1042, 'photo': [], 'text': '干累了', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '凯越-快乐', 'is_bot': False, 'username': 'dszhen0', 'id': 5965182828}}}
+2025-05-01 18:22:53,850 - bot_runner - INFO - 收到消息: 干累了
+2025-05-01 18:22:53,851 - telegram.bot - DEBUG - Entering: send_message
+2025-05-01 18:22:54,514 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/sendMessage HTTP/1.1" 200 602
+2025-05-01 18:22:54,515 - telegram.bot - DEBUG - {'date': 1746094976, 'reply_to_message': {'date': 1746044383, 'message_id': 1042, 'photo': [], 'text': '干累了', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '凯越-快乐', 'is_bot': False, 'username': 'dszhen0', 'id': 5965182828}}, 'message_id': 1049, 'photo': [], 'text': '收到消息: 干累了', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '测试机器人', 'is_bot': True, 'username': 'test1calbot', 'id': 8087490170}}
+2025-05-01 18:22:54,516 - telegram.bot - DEBUG - Exiting: send_message
+2025-05-01 18:22:54,517 - telegram.ext.dispatcher - DEBUG - Processing Update: {'update_id': 10339187, 'message': {'date': 1746044398, 'message_id': 1043, 'photo': [], 'text': '记账应该没问题', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '凯越-快乐', 'is_bot': False, 'username': 'dszhen0', 'id': 5965182828}}}
+2025-05-01 18:22:54,519 - bot_runner - INFO - 收到消息: 记账应该没问题
+2025-05-01 18:22:54,520 - telegram.bot - DEBUG - Entering: send_message
+2025-05-01 18:22:55,087 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/sendMessage HTTP/1.1" 200 650
+2025-05-01 18:22:55,088 - telegram.bot - DEBUG - {'date': 1746094977, 'reply_to_message': {'date': 1746044398, 'message_id': 1043, 'photo': [], 'text': '记账应该没问题', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '凯越-快乐', 'is_bot': False, 'username': 'dszhen0', 'id': 5965182828}}, 'message_id': 1050, 'photo': [], 'text': '收到消息: 记账应该没问题', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '测试机器人', 'is_bot': True, 'username': 'test1calbot', 'id': 8087490170}}
+2025-05-01 18:22:55,089 - telegram.bot - DEBUG - Exiting: send_message
+2025-05-01 18:22:55,090 - telegram.ext.dispatcher - DEBUG - Processing Update: {'update_id': 10339188, 'message': {'date': 1746044427, 'message_id': 1044, 'photo': [], 'text': '等我做明天做完最后的测试就可以用了', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '凯越-快乐', 'is_bot': False, 'username': 'dszhen0', 'id': 5965182828}}}
+2025-05-01 18:22:55,090 - bot_runner - INFO - 收到消息: 等我做明天做完最后的测试就可以用了
+2025-05-01 18:22:55,091 - telegram.bot - DEBUG - Entering: send_message
+2025-05-01 18:22:58,837 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/sendMessage HTTP/1.1" 200 787
+2025-05-01 18:22:58,838 - telegram.bot - DEBUG - {'date': 1746094980, 'reply_to_message': {'date': 1746044427, 'message_id': 1044, 'photo': [], 'text': '等我明天做完最后的测试就可以用了', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'edit_date': 1746044433, 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '凯越-快乐', 'is_bot': False, 'username': 'dszhen0', 'id': 5965182828}}, 'message_id': 1051, 'photo': [], 'text': '收到消息: 等我做明天做完最后的测试就可以用了', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '测试机器人', 'is_bot': True, 'username': 'test1calbot', 'id': 8087490170}}
+2025-05-01 18:22:58,839 - telegram.bot - DEBUG - Exiting: send_message
+2025-05-01 18:22:58,840 - telegram.ext.dispatcher - DEBUG - Processing Update: {'update_id': 10339189, 'edited_message': {'date': 1746044427, 'message_id': 1044, 'photo': [], 'text': '等我明天做完最后的测试就可以用了', 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'edit_date': 1746044433, 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '凯越-快乐', 'is_bot': False, 'username': 'dszhen0', 'id': 5965182828}}}
+2025-05-01 18:22:58,842 - telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\telegram\ext\dispatcher.py", line 555, in process_update
+    handler.handle_update(update, self, check, context)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\PycharmProjects\new test\.venv\Lib\site-packages\telegram\ext\handler.py", line 198, in handle_update
+    return self.callback(update, context)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\PycharmProjects\new test\bot_runner.py", line 118, in echo
+    text = update.message.text
+           ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'text'
+2025-05-01 18:22:58,866 - telegram.ext.dispatcher - DEBUG - Processing Update: {'update_id': 10339190, 'message': {'date': 1746045337, 'message_id': 1045, 'photo': [], 'sticker': {'set_name': 'VIPBBBBBBBB', 'file_id': 'CAACAgUAAyEFAASd4tbkAAID_2gSdMInzrdGWIGh5xCQ0NqMrsX6AAIWCwACK4pZVfwfX68roseuNgQ', 'width': 502, 'emoji': '😘', 'file_size': 7082, 'file_unique_id': 'AgADFgsAAiuKWVU', 'is_animated': False, 'thumb': {'file_id': 'AAMCBQADIQUABJ3i1uQAAgP_aBJ0wifOt0ZYgaHnEJDQ2oyuxfoAAhYLAAIrillV_B9fryuix64BAAdtAAM2BA', 'width': 314, 'file_size': 3462, 'file_unique_id': 'AQADFgsAAiuKWVVy', 'height': 320}, 'height': 512}, 'chat': {'title': '需方测试', 'type': 'supergroup', 'id': -1002648811668}, 'entities': [], 'delete_chat_photo': False, 'group_chat_created': False, 'new_chat_photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'caption_entities': [], 'channel_chat_created': False, 'from': {'first_name': '凯越-JQ', 'is_bot': False, 'username': 'JQ226688', 'language_code': 'zh-hans', 'id': 7997704196}}}
+2025-05-01 18:22:59,675 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 18:22:59,679 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 18:22:59,679 - telegram.bot - DEBUG - []
+2025-05-01 18:22:59,680 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 18:22:59,684 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 18:23:09,859 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 18:23:09,859 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 18:23:09,860 - telegram.bot - DEBUG - []
+2025-05-01 18:23:09,860 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 18:23:09,860 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 18:23:20,035 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 18:23:20,037 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 18:23:20,037 - telegram.bot - DEBUG - []
+2025-05-01 18:23:20,037 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 18:23:20,037 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 18:23:30,220 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 18:23:30,221 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 18:23:30,222 - telegram.bot - DEBUG - []
+2025-05-01 18:23:30,222 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 18:23:30,222 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 18:23:40,578 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 18:23:40,578 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 18:23:40,579 - telegram.bot - DEBUG - []
+2025-05-01 18:23:40,579 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 18:23:40,579 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 18:23:50,786 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 18:23:50,786 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 18:23:50,787 - telegram.bot - DEBUG - []
+2025-05-01 18:23:50,787 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 18:23:50,787 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 18:24:00,982 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 18:24:00,983 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 18:24:00,983 - telegram.bot - DEBUG - []
+2025-05-01 18:24:00,984 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 18:24:00,984 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 18:24:11,159 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 18:24:11,159 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 18:24:11,159 - telegram.bot - DEBUG - []
+2025-05-01 18:24:11,160 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 18:24:11,160 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 18:24:21,332 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 18:24:21,334 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 18:24:21,334 - telegram.bot - DEBUG - []
+2025-05-01 18:24:21,334 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 18:24:21,335 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 18:24:31,511 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 18:24:31,512 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 18:24:31,512 - telegram.bot - DEBUG - []
+2025-05-01 18:24:31,512 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 18:24:31,512 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 18:24:41,761 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 18:24:41,764 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 18:24:41,764 - telegram.bot - DEBUG - []
+2025-05-01 18:24:41,765 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 18:24:41,765 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 18:24:51,942 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 18:24:51,943 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 18:24:51,943 - telegram.bot - DEBUG - []
+2025-05-01 18:24:51,944 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 18:24:51,945 - telegram.bot - DEBUG - Entering: get_updates
+2025-05-01 18:24:53,358 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2025-05-01 18:24:53,362 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-05-01 18:24:53,364 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-05-01 18:24:53,365 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-05-01 18:24:53,366 - telegram.ext.updater - DEBUG - Stopping Updater and Dispatcher...
+2025-05-01 18:24:53,367 - telegram.ext.updater - DEBUG - Requesting Dispatcher to stop...
+2025-05-01 18:24:53,942 - telegram.ext.dispatcher - DEBUG - orderly stopping
+2025-05-01 18:24:53,943 - telegram.ext.dispatcher - DEBUG - Dispatcher thread stopped
+2025-05-01 18:24:53,944 - telegram.ext.updater - DEBUG - Bot:8087490170:dispatcher - ended
+2025-05-01 18:24:53,970 - telegram.ext.dispatcher - DEBUG - Waiting for async thread 1/4 to end
+2025-05-01 18:24:53,971 - telegram.ext.dispatcher - DEBUG - Closing run_async thread Bot:8087490170:worker:8792b0ac-0999-46be-8a29-4fc8f0148819_0/4
+2025-05-01 18:24:53,971 - telegram.ext.dispatcher - DEBUG - Closing run_async thread Bot:8087490170:worker:8792b0ac-0999-46be-8a29-4fc8f0148819_1/4
+2025-05-01 18:24:53,971 - telegram.ext.dispatcher - DEBUG - Closing run_async thread Bot:8087490170:worker:8792b0ac-0999-46be-8a29-4fc8f0148819_2/4
+2025-05-01 18:24:53,971 - telegram.ext.dispatcher - DEBUG - Closing run_async thread Bot:8087490170:worker:8792b0ac-0999-46be-8a29-4fc8f0148819_3/4
+2025-05-01 18:24:53,974 - telegram.ext.dispatcher - DEBUG - async thread 1/4 has ended
+2025-05-01 18:24:53,975 - telegram.ext.dispatcher - DEBUG - Waiting for async thread 2/4 to end
+2025-05-01 18:24:53,976 - telegram.ext.dispatcher - DEBUG - async thread 2/4 has ended
+2025-05-01 18:24:53,978 - telegram.ext.dispatcher - DEBUG - Waiting for async thread 3/4 to end
+2025-05-01 18:24:53,979 - telegram.ext.dispatcher - DEBUG - async thread 3/4 has ended
+2025-05-01 18:24:53,979 - telegram.ext.dispatcher - DEBUG - Waiting for async thread 4/4 to end
+2025-05-01 18:24:53,980 - telegram.ext.dispatcher - DEBUG - async thread 4/4 has ended
+2025-05-01 18:24:53,980 - telegram.ext.updater - DEBUG - Waiting for Bot:8087490170:dispatcher thread to end
+2025-05-01 18:24:53,981 - telegram.ext.updater - DEBUG - Bot:8087490170:dispatcher thread has ended
+2025-05-01 18:24:53,981 - telegram.ext.updater - DEBUG - Waiting for Bot:8087490170:updater thread to end
+2025-05-01 18:25:02,119 - urllib3.connectionpool - DEBUG - https://api.telegram.org:443 "POST /bot8087490170:AAFfQOoYt5qrXlcUnoB1YJJMeW1t3nrfrG4/getUpdates HTTP/1.1" 200 23
+2025-05-01 18:25:02,120 - telegram.bot - DEBUG - No new updates found.
+2025-05-01 18:25:02,121 - telegram.bot - DEBUG - []
+2025-05-01 18:25:02,121 - telegram.bot - DEBUG - Exiting: get_updates
+2025-05-01 18:25:02,121 - telegram.ext.updater - DEBUG - Bot:8087490170:updater - ended
+2025-05-01 18:25:02,121 - telegram.ext.updater - DEBUG - Bot:8087490170:updater thread has ended
