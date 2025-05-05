@@ -943,11 +943,21 @@ def handle_text_message(update: Update, context: CallbackContext) -> None:
         help_command(update, context)
         return
 
-def handle_export_all_bills_command(update: Update, context: CallbackContext) -> None:
+def handle_export_all_bills_command(update_or_query, context: CallbackContext) -> None:
     """处理文本命令'导出全部账单'"""
     logger.info("处理导出全部账单文本命令")
     
-    chat_id = update.effective_chat.id
+    # 检查是否是回调查询
+    is_callback = hasattr(update_or_query, 'callback_query')
+    
+    if is_callback:
+        query = update_or_query
+        chat_id = query.message.chat_id
+        update_object = query
+    else:
+        # 常规消息更新
+        chat_id = update_or_query.effective_chat.id
+        update_object = update_or_query
     
     try:
         # 获取群组信息
@@ -991,7 +1001,10 @@ def handle_export_all_bills_command(update: Update, context: CallbackContext) ->
         
         # 如果没有找到任何有记录的日期
         if not dates_with_records:
-            update.message.reply_text(f"{chat_title} 最近7天内没有任何记账记录")
+            if is_callback:
+                query.edit_message_text(f"{chat_title} 最近7天内没有任何记账记录")
+            else:
+                update_object.message.reply_text(f"{chat_title} 最近7天内没有任何记账记录")
             return
         
         # 创建日期选择按钮
@@ -1006,11 +1019,17 @@ def handle_export_all_bills_command(update: Update, context: CallbackContext) ->
         reply_markup = InlineKeyboardMarkup(keyboard)
         
         # 发送日期选择界面
-        update.message.reply_text(f"请选择要导出的日期:", reply_markup=reply_markup)
+        if is_callback:
+            query.edit_message_text(f"请选择要导出的日期:", reply_markup=reply_markup)
+        else:
+            update_object.message.reply_text(f"请选择要导出的日期:", reply_markup=reply_markup)
         
     except Exception as e:
         logger.error(f"展示导出日期选择界面时出错: {e}", exc_info=True)
-        update.message.reply_text(f"显示日期选择界面时出错: {str(e)}")
+        if is_callback:
+            query.edit_message_text(f"显示日期选择界面时出错: {str(e)}")
+        else:
+            update_object.message.reply_text(f"显示日期选择界面时出错: {str(e)}")
 
 def export_chat_all_days_to_txt(chat_id, chat_title, summary_text, date_list):
     """导出指定聊天在最近7天内的账单数据为TXT文件"""
@@ -1042,33 +1061,6 @@ def export_chat_all_days_to_txt(chat_id, chat_title, summary_text, date_list):
         # 汇率
         rate = chat_data.get('fixed_rate', 1.0)
         
-        # 添加入款和出款的明细列表
-        content += "===== 全部入款明细 =====\n"
-        if all_deposits:
-            sorted_deposits = sorted(all_deposits, key=lambda x: x.get('time', ''), reverse=True)
-            for i, deposit in enumerate(sorted_deposits, 1):
-                amount = deposit['amount']
-                username = deposit['user']
-                time_str = deposit.get('time', '未知时间')
-                usd_equivalent = amount / rate if rate != 0 else 0
-                
-                content += f"{i}. 时间: {time_str}, 金额: {amount:.2f}, 用户: {username}, USD等值: {usd_equivalent:.2f}\n"
-        else:
-            content += "暂无入款记录\n"
-            
-        content += "\n===== 全部出款明细 =====\n"
-        if all_withdrawals:
-            sorted_withdrawals = sorted(all_withdrawals, key=lambda x: x.get('time', ''), reverse=True)
-            for i, withdrawal in enumerate(sorted_withdrawals, 1):
-                amount = withdrawal['amount']
-                username = withdrawal['user']
-                time_str = withdrawal.get('time', '未知时间')
-                usd_equivalent = withdrawal['usd_equivalent']
-                
-                content += f"{i}. 时间: {time_str}, 金额: {amount:.2f}, 用户: {username}, USD等值: {usd_equivalent:.2f}\n"
-        else:
-            content += "暂无出款记录\n"
-            
         # 按日期组织明细数据
         content += "\n===== 按日期明细 =====\n"
         for date_str in date_list:
@@ -1438,33 +1430,6 @@ def export_chat_all_days_to_txt(chat_id, chat_title, summary_text, date_list):
         # 汇率
         rate = chat_data.get('fixed_rate', 1.0)
         
-        # 添加入款和出款的明细列表
-        content += "===== 全部入款明细 =====\n"
-        if all_deposits:
-            sorted_deposits = sorted(all_deposits, key=lambda x: x.get('time', ''), reverse=True)
-            for i, deposit in enumerate(sorted_deposits, 1):
-                amount = deposit['amount']
-                username = deposit['user']
-                time_str = deposit.get('time', '未知时间')
-                usd_equivalent = amount / rate if rate != 0 else 0
-                
-                content += f"{i}. 时间: {time_str}, 金额: {amount:.2f}, 用户: {username}, USD等值: {usd_equivalent:.2f}\n"
-        else:
-            content += "暂无入款记录\n"
-            
-        content += "\n===== 全部出款明细 =====\n"
-        if all_withdrawals:
-            sorted_withdrawals = sorted(all_withdrawals, key=lambda x: x.get('time', ''), reverse=True)
-            for i, withdrawal in enumerate(sorted_withdrawals, 1):
-                amount = withdrawal['amount']
-                username = withdrawal['user']
-                time_str = withdrawal.get('time', '未知时间')
-                usd_equivalent = withdrawal['usd_equivalent']
-                
-                content += f"{i}. 时间: {time_str}, 金额: {amount:.2f}, 用户: {username}, USD等值: {usd_equivalent:.2f}\n"
-        else:
-            content += "暂无出款记录\n"
-            
         # 按日期组织明细数据
         content += "\n===== 按日期明细 =====\n"
         for date_str in date_list:
