@@ -4,4 +4,4 @@ requests
 urllib3==1.26.15
 certifi>=2023.7.22
 setuptools>=65.5.1
-APScheduler==3.10.0 
+APScheduler==3.6.3 
