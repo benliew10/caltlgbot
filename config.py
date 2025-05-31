@@ -3,7 +3,7 @@
 
 # Telegram Bot API Token
 # 从BotFather获取的API令牌 - 需要替换为您自己的令牌
-BOT_TOKEN = "8087490170:AAGkIL_s_NywMN0z6uyx7Jty6r66Ej9SfS0"
+BOT_TOKEN = "8087490170:AAFs_XlHg3Ycrm2as1ZnTuLtQW18Z_g7X0Q"
 
 # 管理员用户ID
 # 可以预先设置管理员的Telegram用户ID（数字格式）
